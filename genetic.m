@@ -5,8 +5,15 @@
 % 4. This function breeds the pairs using mutation and crossover
 % 5. This function returns the new population
 
-function [outputArg1,outputArg2] = genetic(inputArg1,inputArg2)
-outputArg1 = inputArg1;
-outputArg2 = inputArg2;
+function [new_chromosomes] = genetic(chromosomes)
+    for i = 1:10
+        fitness(i) = sum(chromosomes(:,i));
+    end    
+    fitness
+    [a,b] = sort(fitness,'descend')
+    
+%     for j = 1:55
+%         choice_raffle(j) = 
+%     end
 end
 
