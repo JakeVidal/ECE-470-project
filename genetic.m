@@ -5,15 +5,25 @@
 % 4. This function breeds the pairs using mutation and crossover
 % 5. This function returns the new population
 
-function [new_chromosomes] = genetic(chromosomes)
-    for i = 1:10
+function [new_chromosomes] = genetic(chromosomes,population)
+    for i = 1:population
         fitness(i) = sum(chromosomes(:,i));
     end    
-    fitness
-    [a,b] = sort(fitness,'descend')
+
+    [~,f] = sort(fitness,'descend')
     
-%     for j = 1:55
-%         choice_raffle(j) = 
-%     end
+    v = zeros(population,1);
+    for j = 1:population
+        v(j) = population+1-j; 
+    end
+    
+    genetic_raffle = repelem(f,v);
+    
+    first_parent = genetic_raffle(round((size(genetic_raffle,2)-1)*rand(1,1)+1));
+    second_parent = first_parent;
+    while second_parent == first_parent
+        second_parent = genetic_raffle(round((size(genetic_raffle,2)-1)*rand(1,1)+1));
+    end
+    
 end
 
