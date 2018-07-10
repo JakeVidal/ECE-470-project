@@ -14,7 +14,7 @@ function [new_chromosomes,fitness] = genetic(chromosomes,num_features,population
     
     v = zeros(population,1);
     for j = 1:population
-        v(j) = population+1-j; 
+        v(j) = round(population/(1.5*j)); 
     end
     
     genetic_raffle = repelem(f,v);
