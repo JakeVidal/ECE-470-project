@@ -19,6 +19,8 @@ function [new_chromosomes,fitness] = genetic(chromosomes,num_features,population
     
     genetic_raffle = repelem(f,v);
     
+    %good to here
+    
     for k = 1:population
         first_parent = genetic_raffle(round((size(genetic_raffle,2)-1)*rand(1,1)+1));
         second_parent = first_parent;
@@ -36,6 +38,5 @@ function [new_chromosomes,fitness] = genetic(chromosomes,num_features,population
             end
         end
     end
-
 end
 
