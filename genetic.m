@@ -6,6 +6,8 @@
 % 5. This function returns the new population
 
 function [new_chromosomes,fitness] = genetic(chromosomes,num_features,population,crossover_rate,mutation_rate)
+    
+    fitness = zeros(1,population);
     for i = 1:population
         fitness(i) = sum(chromosomes(:,i));
     end    
@@ -19,8 +21,7 @@ function [new_chromosomes,fitness] = genetic(chromosomes,num_features,population
     
     genetic_raffle = repelem(f,v);
     
-    %good to here
-    
+    new_chromosomes = zeros(num_features,population);
     for k = 1:population
         first_parent = genetic_raffle(round((size(genetic_raffle,2)-1)*rand(1,1)+1));
         second_parent = first_parent;
@@ -33,7 +34,7 @@ function [new_chromosomes,fitness] = genetic(chromosomes,num_features,population
             if rand(1,1) >= crossover_rate
                 new_chromosomes(m,k) = chromosomes(m,second_parent);
             end
-            if rand(1,1) >= mutation_rate
+            if rand(1,1) <= mutation_rate
                 new_chromosomes(m,k) = ~new_chromosomes(m,k);
             end
         end
