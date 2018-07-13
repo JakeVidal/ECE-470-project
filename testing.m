@@ -5,9 +5,9 @@ population = 10;
 num_features = 369;
 mutation_rate = 0.01;
 crossover_rate = 0.5;
-generations = 5;
+generations = 20;
 
-% [Xtrain,Xtest,Ytrain,Ytest] = Preprocess;
+% [Xtrain,Xtest,Ytrain,Ytest] = preprocessing;
 load Xtrain
 load Xtest
 load Ytrain
@@ -19,9 +19,10 @@ for i = 1:population
 end
 
 for j = 1:generations
+    tic
     [chromosomes,fitness] = genetic(chromosomes,num_features,population,...
     crossover_rate,mutation_rate,Xtrain,Xtest,Ytrain,Ytest);
-
+    toc
     result(j) = sum(fitness);
 end
 plot(1:generations,result(1:generations))

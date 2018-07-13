@@ -1,7 +1,7 @@
 % Data preprocessing script
 % This script preprocesses datasets, generating training and testing sets
 
-function [ Xtrain, Xtest, Ytrain, Ytest ] = Preprocess( )
+function [ Xtrain, Xtest, Ytrain, Ytest ] = preprocessing()
 
 load train.csv
 
