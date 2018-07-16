@@ -9,7 +9,7 @@ function [accuracy] = classifier(chromosome,Xtest,Xtrain,Ytest,Ytrain)
     Xtrain2 = Xtrain(vector,:);
     
     class = Ytest();
-    for i = 15000:15202%(size(Xtest2,2)-2) this is hacking
+    for i = 14501:14701
         temp = KNN(Xtest2(:,i),Xtrain2,Ytrain,5);
         if Ytest(i) ~= temp
             class(i) = 0;
@@ -18,5 +18,5 @@ function [accuracy] = classifier(chromosome,Xtest,Xtrain,Ytest,Ytrain)
         end
     end
     
-    accuracy = 100*sum(class(15000:15202))/202;
+    accuracy = 100*sum(class(14501:14701))/200;
 end
