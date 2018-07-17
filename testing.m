@@ -5,7 +5,7 @@ population = 20;
 num_features = 369;
 mutation_rate = 0.012;
 crossover_rate = 0.5;
-generations = 15;
+generations = 25;
 
 % [Xtrain,Xtest,Ytrain,Ytest] = preprocessing;
 load Xtrain
@@ -29,6 +29,6 @@ for j = 1:generations
 end
 
 plot(1:generations,result(1:generations))
-axis([0 generations 0 100]);
+axis([0 generations 0 5]);
 xlabel('generations');
-ylabel('accuracy(%)');
+ylabel('fitness');

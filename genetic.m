@@ -8,14 +8,15 @@
 function [new_chromosomes,fitness] = genetic(chromosomes,num_features,population,crossover_rate,mutation_rate,Xtrain,Xtest,Ytrain,Ytest)
     fitness = zeros(1,population);
     parfor i = 1:population
-        fitness(i) = classifier(chromosomes(:,i),Xtest,Xtrain,Ytest,Ytrain);
+        %fitness(i) = classifier(chromosomes(:,i),Xtest,Xtrain,Ytest,Ytrain);
+        fitness(i) = 3*classifier(chromosomes(:,i),Xtest,Xtrain,Ytest,Ytrain)/100 + 2*(size(chromosomes(:,i),2) - sum(chromosomes(:,i)))/(100*size(chromosomes(:,i),2));
     end    
     
     [~,f] = sort(fitness,'descend');
     
     v = zeros(population,1);
     for j = 1:population
-        v(j) = round(population/(1.5*j)); 
+        v(j) = round(population/(1.2*j)); 
     end
     
     genetic_raffle = repelem(f,v);
