@@ -11,10 +11,6 @@
 
 function [Class] = KNN(x,X,Y,K)
 
-x = gpuArray(x);
-X = gpuArray(X);
-Y = gpuArray(Y);
-
 [~,n] = size(X);
 n2 = n-sum(Y);
 %m2 = 2*m;
