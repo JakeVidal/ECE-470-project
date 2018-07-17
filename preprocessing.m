@@ -47,7 +47,7 @@ Xtrain = [Xntr Xptr];
 Ytrain = [zeros(1,n1trn), ones(1,n2trn)];
 
 Xtest = [Xnte Xpte];
-Ytest = [zeros(1,(n1-n1test)), ones(1,(n2-n2test))];
+Ytest = [zeros(1,(n1-n1test+1)), ones(1,(n2-n2test+1))];
 
 
 % 2-d plot to visualize distance
