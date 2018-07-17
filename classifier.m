@@ -10,7 +10,7 @@ function [accuracy] = classifier(chromosome,Xtest,Xtrain,Ytest,Ytrain)
     
     class = Ytest();
     for i = 14501:14701
-        temp = KNN(Xtest2(:,i),Xtrain2,Ytrain,7);
+        temp = KNN(Xtest2(:,i),Xtrain2,Ytrain,5);
         if Ytest(i) ~= temp
             class(i) = 0;
         else

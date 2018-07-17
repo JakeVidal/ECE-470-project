@@ -5,18 +5,22 @@
 % 4. This function breeds the pairs using mutation and crossover
 % 5. This function returns the new population
 
-function [new_chromosomes,fitness] = genetic(chromosomes,num_features,population,crossover_rate,mutation_rate,Xtrain,Xtest,Ytrain,Ytest)
+function [new_chromosomes,fitness,accuracy,features_used] = genetic(chromosomes,num_features,population,crossover_rate,mutation_rate,Xtrain,Xtest,Ytrain,Ytest)
     fitness = zeros(1,population);
+    accuracy = zeros(1,population);
+    features_used = zeros(1,population);
     parfor i = 1:population
-        %fitness(i) = classifier(chromosomes(:,i),Xtest,Xtrain,Ytest,Ytrain);
-        fitness(i) = 3*classifier(chromosomes(:,i),Xtest,Xtrain,Ytest,Ytrain)/100 + 2*(size(chromosomes(:,i),2) - sum(chromosomes(:,i)))/(100*size(chromosomes(:,i),2));
+        features_used(i) = sum(chromosomes(:,i));
+        accuracy(i) = classifier(chromosomes(:,i),Xtest,Xtrain,Ytest,Ytrain)
+        %fitness(i) = accuracy(i);
+        fitness(i) = 4*accuracy(i)/100 + 2*(num_features - features_used(i))/num_features;
     end    
     
     [~,f] = sort(fitness,'descend');
     
     v = zeros(population,1);
     for j = 1:population
-        v(j) = round(population/(1.2*j)); 
+        v(j) = round(population/(1.5*j)); 
     end
     
     genetic_raffle = repelem(f,v);
