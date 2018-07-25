@@ -9,9 +9,9 @@ function [new_chromosomes,fitness,accuracy,features_used] = genetic(chromosomes,
     fitness = zeros(1,population);
     accuracy = zeros(1,population);
     features_used = zeros(1,population);
-    parfor i = 1:population
+    for i = 1:population
         features_used(i) = sum(chromosomes(:,i));
-        accuracy(i) = classifier(chromosomes(:,i),Xtest,Xtrain,Ytest,Ytrain)
+        accuracy(i) = classifier(chromosomes(:,i),Xtest,Xtrain,Ytest,Ytrain);
         %fitness(i) = accuracy(i);
         fitness(i) = 4*accuracy(i)/100 + 2*(num_features - features_used(i))/num_features;
     end    

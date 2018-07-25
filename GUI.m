@@ -29,6 +29,16 @@ function GUI(task, fitness_result, accuracy, features_used, generations, iterati
             xlabel('generations');
             ylabel('# features');
             
+            btn = uicontrol('Style', 'pushbutton', 'String', 'Pause',...
+            'Position', [430 20 70 20],...
+            'Callback', @stop_execution);  
+            
+            btn2 = uicontrol('Style', 'pushbutton', 'String', 'Start',...
+            'Position', [80 20 70 20],...
+            'Callback', @start_execution);  
+        
+            uiwait;
+        
         case 'update'
             subplot(3,1,1);
             plot(0:iteration, fitness_result(1:iteration+1));
@@ -49,5 +59,13 @@ function GUI(task, fitness_result, accuracy, features_used, generations, iterati
             ylabel('# features');
     end
     
+    function stop_execution(source,event)
+        uiwait;
+    end
+
+    function start_execution(source,event)
+        uiresume;
+    end
+
     drawnow
 end
