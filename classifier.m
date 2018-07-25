@@ -3,27 +3,27 @@
 
 function [accuracy] = classifier(chromosome,Xtest,Xtrain,Ytest,Ytrain)
     
-    model_select = 2;
+    model_select = 3;
     
-    vector = find(chromosome(:,1));
-    Xtest2 = Xtest(vector,14501:14701);
-    Xtrain2 = Xtrain(vector,:);
-    Ytest2 = Ytest(14501:14701);
+    vector = find(~chromosome(:,1))';
+    Xtest2 = removevars(Xtest,vector);%Xtest(:,vector);
+    Xtrain2 = removevars(Xtrain,vector);%Xtrain(:,vector);
+    Ytest2 = categorical(Ytest.Democrat);
 
     switch model_select
         case 1
-            knn_model = fitcknn(Xtrain2',Ytrain');
-            classification = predict(knn_model, Xtest2')';
+            knn_model = fitcknn(Xtrain2,Ytrain);
+            classification = predict(knn_model, Xtest2);
             test = Ytest2() ~= classification;
         case 2
-            svm_model = fitclinear(Xtrain2',Ytrain');
-            classification = predict(svm_model, Xtest2')';
+            svm_model = fitclinear(Xtrain2,Ytrain);
+            classification = predict(svm_model, Xtest2);
             test = Ytest2() ~= classification;
         case 3
-            multi_svm_model = fitcecoc(Xtrain2',Ytrain');
-            classification = predict(multi_svm_model, Xtest2')';
+            tree_model = fitctree(Xtrain2,Ytrain);
+            classification = predict(tree_model, Xtest2);
             test = Ytest2() ~= classification;
     end
     
-    accuracy = 100-(100*sum(test)/200);
+    accuracy = 100-(100*sum(test)/568);
 end

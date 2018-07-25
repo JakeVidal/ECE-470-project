@@ -5,8 +5,8 @@
 function GUI(task, fitness_result, accuracy, features_used, generations, iteration)
     
     fitness_result = [0 fitness_result];
-    accuracy = [0 accuracy];
-    features_used = [369 features_used];
+    accuracy = [50 accuracy];
+    features_used = [106 features_used];
 
     switch task
         case 'initialize'
@@ -19,13 +19,13 @@ function GUI(task, fitness_result, accuracy, features_used, generations, iterati
             
             subplot(3,1,2);
             plot(0, accuracy(1));
-            axis([0 generations 0 100]);
+            axis([0 generations 50 100]);
             xlabel('generations');
             ylabel('accuracy');
             
             subplot(3,1,3);
             plot(0, features_used(1));
-            axis([0 generations 0 369]);
+            axis([0 generations 0 106]);
             xlabel('generations');
             ylabel('# features');
             
@@ -48,13 +48,13 @@ function GUI(task, fitness_result, accuracy, features_used, generations, iterati
             
             subplot(3,1,2);
             plot(0:iteration, accuracy(1:iteration+1));
-            axis([0 generations 0 100]);
+            axis([0 generations 50 100]);
             xlabel('generations');
             ylabel('accuracy');
             
             subplot(3,1,3);
             plot(0:iteration, features_used(1:iteration+1));
-            axis([0 generations 0 369]);
+            axis([0 generations 0 106]);
             xlabel('generations');
             ylabel('# features');
     end
