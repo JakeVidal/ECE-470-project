@@ -12,8 +12,12 @@ function [new_chromosomes,fitness,accuracy,features_used] = genetic(chromosomes,
     for i = 1:population
         features_used(i) = sum(chromosomes(:,i));
         accuracy(i) = classifier(chromosomes(:,i),Xtest,Xtrain,Ytest,Ytrain);
-        %fitness(i) = accuracy(i);
-        fitness(i) = 4*accuracy(i)/100 + 2*(num_features - features_used(i))/num_features;
+        X = accuracy(i);
+        Y = 100*(num_features - features_used(i))/num_features;
+        %fitness(i) = X;
+        %fitness(i) = 4*X/100 + 2*Y/100;
+        %fitness(i) = (100*X^2)+(X*Y^2)*(1-sigmf(Y,[0.1 100]));
+        fitness(i) = ((100*X^2)+(X*Y^2))*(0.5+sigmf(X,[0.1 60]));
     end    
     
     [~,f] = sort(fitness,'descend');
