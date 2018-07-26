@@ -16,15 +16,15 @@ function [new_chromosomes,fitness,accuracy,features_used] = genetic(chromosomes,
         Y = 100*(num_features - features_used(i))/num_features;
         %fitness(i) = X;
         %fitness(i) = 4*X/100 + 2*Y/100;
-        %fitness(i) = (100*X^2)+(X*Y^2)*(1-sigmf(Y,[0.1 100]));
-        fitness(i) = ((100*X^2)+(X*Y^2))*(0.5+sigmf(X,[0.1 60]));
+        fitness(i) = (100*X^2)+(X*Y^2)*(1-sigmf(Y,[0.1 100]));
+        %fitness(i) = ((100*X^2)+(X*Y^2))*(0.5+sigmf(X,[0.1 60]));
     end    
     
     [~,f] = sort(fitness,'descend');
     
     v = zeros(population,1);
     for j = 1:population
-        v(j) = round(population/(1.5*j)); 
+        v(j) = round(population/(1.2*j)); 
     end
     
     genetic_raffle = repelem(f,v);
