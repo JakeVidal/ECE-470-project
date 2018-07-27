@@ -5,7 +5,7 @@
 % 4. This function breeds the pairs using mutation and crossover
 % 5. This function returns the new population
 
-function [new_chromosomes,fitness,accuracy,features_used] = genetic(chromosomes,num_features,population,crossover_rate,mutation_rate,Xtrain,Xtest,Ytrain,Ytest)
+function [new_chromosomes,fitness,accuracy,features_used] = genetic(chromosomes,num_features,population,crossover_rate,mutation_rate,Xtrain,Xtest,Ytrain,Ytest,fitness_select)
     fitness = zeros(1,population);
     accuracy = zeros(1,population);
     features_used = zeros(1,population);
@@ -14,10 +14,7 @@ function [new_chromosomes,fitness,accuracy,features_used] = genetic(chromosomes,
         accuracy(i) = classifier(chromosomes(:,i),Xtest,Xtrain,Ytest,Ytrain);
         X = accuracy(i);
         Y = 100*(num_features - features_used(i))/num_features;
-        %fitness(i) = X;
-        %fitness(i) = 4*X/100 + 2*Y/100;
-        %fitness(i) = (100*X.^2 +X.*Y.^2).*(1-sigmf(Y,[.1 100]));
-        fitness(i) = (100*X.^2 +X.*Y.^2).*(.5+sigmf(X,[1 60]));
+        fitness(i) = fitness_function(X,Y,fitness_select);
     end    
     
     [~,f] = sort(fitness,'descend');

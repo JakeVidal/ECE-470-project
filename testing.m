@@ -11,6 +11,7 @@ num_features = 106;
 mutation_rate = 0.02;
 crossover_rate = 0.5;
 generations = 1000;
+fitness_select = 'default';
 
 fitness_result = zeros(1,generations);
 accuracy = zeros(1,generations);
@@ -20,7 +21,7 @@ mean_fitness = zeros(1,generations);
 mean_accuracy = zeros(1,generations);
 mean_features = zeros(1,generations);
 
-[population,mutation_rate] = GUI('initialize',fitness_result,accuracy,features_used,mean_fitness,mean_accuracy,mean_features,generations,0,population,mutation_rate);
+[population,mutation_rate,fitness_select] = GUI('initialize',fitness_result,accuracy,features_used,mean_fitness,mean_accuracy,mean_features,generations,0,population,mutation_rate,fitness_select);
 
 chromosomes = ones(num_features,population);
 % for i = 1:population
@@ -30,7 +31,7 @@ chromosomes = ones(num_features,population);
 for j = 1:generations
     tic
     [chromosomes,fit,acc,used] = genetic(chromosomes,num_features,population,...
-    crossover_rate,mutation_rate,Xtrain,Xtest,Ytrain,Ytest);
+    crossover_rate,mutation_rate,Xtrain,Xtest,Ytrain,Ytest,fitness_select);
     toc
     
     fitness_result(j) = max(fit);
@@ -41,6 +42,6 @@ for j = 1:generations
     mean_accuracy(j) = mean(acc);
     mean_features(j) = mean(used);
     
-    [population,mutation_rate] = GUI('update',fitness_result,accuracy,features_used,mean_fitness,mean_accuracy,mean_features,generations,j,population,mutation_rate);
+    [population,mutation_rate,fitness_select] = GUI('update',fitness_result,accuracy,features_used,mean_fitness,mean_accuracy,mean_features,generations,j,population,mutation_rate,fitness_select);
 end
 
