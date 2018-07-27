@@ -9,22 +9,22 @@ function [new_chromosomes,fitness,accuracy,features_used] = genetic(chromosomes,
     fitness = zeros(1,population);
     accuracy = zeros(1,population);
     features_used = zeros(1,population);
-    for i = 1:population
+    parfor i = 1:population
         features_used(i) = sum(chromosomes(:,i));
         accuracy(i) = classifier(chromosomes(:,i),Xtest,Xtrain,Ytest,Ytrain);
         X = accuracy(i);
         Y = 100*(num_features - features_used(i))/num_features;
         %fitness(i) = X;
         %fitness(i) = 4*X/100 + 2*Y/100;
-        fitness(i) = (100*X^2)+(X*Y^2)*(1-sigmf(Y,[0.1 100]));
-        %fitness(i) = ((100*X^2)+(X*Y^2))*(0.5+sigmf(X,[0.1 60]));
+        %fitness(i) = (100*X.^2 +X.*Y.^2).*(1-sigmf(Y,[.1 100]));
+        fitness(i) = (100*X.^2 +X.*Y.^2).*(.5+sigmf(X,[1 60]));
     end    
     
     [~,f] = sort(fitness,'descend');
     
     v = zeros(population,1);
     for j = 1:population
-        v(j) = round(population/(1.2*j)); 
+        v(j) = round(population/(2*j)); 
     end
     
     genetic_raffle = repelem(f,v);

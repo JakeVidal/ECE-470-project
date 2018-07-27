@@ -1,9 +1,9 @@
 % Genetic algorithm testing script
 % 1. This script generates an initial population of solutions
 % 2. This script runs the genetic algorithm on the initial population
-population = 12;
+population = 20;
 num_features = 106;
-mutation_rate = 0.012;
+mutation_rate = 0.02;
 crossover_rate = 0.5;
 generations = 1000;
 
