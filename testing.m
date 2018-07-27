@@ -1,6 +1,11 @@
 % Genetic algorithm testing script
 % 1. This script generates an initial population of solutions
 % 2. This script runs the genetic algorithm on the initial population
+load Xtrain
+load Xtest
+load Ytrain
+load Ytest
+
 population = 20;
 num_features = 106;
 mutation_rate = 0.02;
@@ -15,12 +20,7 @@ mean_fitness = zeros(1,generations);
 mean_accuracy = zeros(1,generations);
 mean_features = zeros(1,generations);
 
-load Xtrain
-load Xtest
-load Ytrain
-load Ytest
-
-GUI('initialize',fitness_result,accuracy,features_used,mean_fitness,mean_accuracy,mean_features,generations,0)
+[population,mutation_rate] = GUI('initialize',fitness_result,accuracy,features_used,mean_fitness,mean_accuracy,mean_features,generations,0,population,mutation_rate);
 
 chromosomes = ones(num_features,population);
 % for i = 1:population
@@ -41,6 +41,6 @@ for j = 1:generations
     mean_accuracy(j) = mean(acc);
     mean_features(j) = mean(used);
     
-    GUI('update',fitness_result,accuracy,features_used,mean_fitness,mean_accuracy,mean_features,generations,j)
+    [population,mutation_rate] = GUI('update',fitness_result,accuracy,features_used,mean_fitness,mean_accuracy,mean_features,generations,j,population,mutation_rate);
 end
 
