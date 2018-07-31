@@ -137,7 +137,7 @@ function [population,mutation,fitness_choice] = GUI(task,fitness_result,accuracy
     handle1 = findall(gcf, 'Tag', 'pop');
     handle2 = findall(gcf, 'Tag', 'mut');
     handle3 = findall(gcf, 'Tag', 'sel');
-    population = handle1.Value;
+    population = round(handle1.Value);
     mutation = handle2.Value;
     fitness_choice = handle3.String{handle3.Value};
 
