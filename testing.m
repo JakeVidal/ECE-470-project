@@ -6,11 +6,11 @@ load Xtest
 load Ytrain
 load Ytest
 
-population = 20;
+population = 10;
 num_features = 106;
 mutation_rate = 0.02;
 crossover_rate = 0.5;
-generations = 1000;
+generations = 50;
 fitness_select = 'default';
 
 fitness_result = zeros(1,generations);

@@ -25,7 +25,7 @@ function [accuracy] = classifier(chromosome,Xtest,Xtrain,Ytest,Ytrain)
             classification = predict(tree_model, Xtest2);
             test = Ytest2() ~= classification;
         case 4
-            bayes_model = fitnlm(Xtrain2,Ytrain2);
+            bayes_model = fitcnb(Xtrain2,Ytrain2);
             classification = predict(bayes_model, Xtest2);
             test = Ytest2() ~= classification;            
     end
