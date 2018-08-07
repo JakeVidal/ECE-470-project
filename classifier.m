@@ -1,16 +1,20 @@
-%This function returns the accuracy of classification when using a
-%chromosome with a value between 0 and 100
+%==========================================================================
+% Feature removal classification accuracy function
+%==========================================================================
 
 function [accuracy] = classifier(chromosome,Xtest,Xtrain,Ytest,Ytrain)
     
+    % selects the classifier to be used for accuracy evaluation
     model_select = 1;
     
+    %removes appropriate features from datasets according to the chromosome
     vector = find(chromosome(:,1))';
     Xtest2 = Xtest(:,vector);
     Xtrain2 = Xtrain(:,vector);
     Ytrain2 = categorical(Ytrain.Democrat);
     Ytest2 = categorical(Ytest.Democrat);
 
+    % for each model, train using training dataset then classify using testing dataset
     switch model_select
         case 1
             knn_model = fitcknn(Xtrain2,Ytrain2);
@@ -30,5 +34,6 @@ function [accuracy] = classifier(chromosome,Xtest,Xtrain,Ytest,Ytrain)
             test = Ytest2() ~= classification;            
     end
     
+    % evaluate classification accuracy
     accuracy = 100-(100*sum(test)/568);
 end
