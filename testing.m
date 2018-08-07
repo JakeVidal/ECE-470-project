@@ -54,10 +54,12 @@ for j = 1:generations
     accuracy,features_used,mean_fitness,mean_accuracy,mean_features,generations,...
     j,population,mutation_rate,fitness_select);
     
-%     if j == generations
-%         [fitness_result(j); mean_fitness(j)]
-%         [accuracy(j) features_used(j);...
-%         mean_accuracy(j) mean_features(j)]
-%     end
+    % used to output final generation results, two arrays used for
+    % different number scaling required for the fitness result
+    % if j == generations
+    % [fitness_result(j); mean_fitness(j)]
+    % [accuracy(j) features_used(j);...
+    % mean_accuracy(j) mean_features(j)]
+    % end
 end
 

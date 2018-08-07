@@ -11,6 +11,6 @@ function [output] = fitness_function(X,Y,selector)
         case 'simple'
             output =(10*(X).^2).*(10*(Y).^2);
         case 'complex'
-            output = (100*X.^2 +X.*Y.^2).*(.5+sigmf(X,[1 55]));
+            output = (100*X.^2+X.*Y.^2).*(.5+(1./(1+exp(-X+55))));
     end
 end
